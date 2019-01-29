@@ -88,6 +88,7 @@ public class ChooseAreaFragment extends Fragment {
         View view = inflater.inflate(R.layout.choose_area, container, false);
         titleText = view.findViewById(R.id.title_text);
         backButton = view.findViewById(R.id.back_button);
+        mProgressBar = view.findViewById(R.id.progressBar);
         mListView = view.findViewById(R.id.list_view);
         mAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dataList);
         mListView.setAdapter(mAdapter);
@@ -197,7 +198,9 @@ public class ChooseAreaFragment extends Fragment {
      *  根据传入的地址和类型从服务器上查询省市县数据
      */
     private void queryFromServer(String address, final String type){
-        mProgressBar.setVisibility(View.VISIBLE);
+        if(mProgressBar.getVisibility() == View.GONE){
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
