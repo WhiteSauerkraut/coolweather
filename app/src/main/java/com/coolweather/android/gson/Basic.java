@@ -4,17 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Basic {
 
-    @SerializedName("city")
+    @SerializedName("location")
     public String cityName;
 
-    @SerializedName("id")
-    public String weatherId;
+    @SerializedName("cid")
+    public String cityId;
 
-    public Update update;
-
-    public class Update{
-
-        @SerializedName("loc")
-        public String updateTime;
-    }
 }

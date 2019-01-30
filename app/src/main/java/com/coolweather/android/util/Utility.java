@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.coolweather.android.db.City;
 import com.coolweather.android.db.County;
 import com.coolweather.android.db.Province;
+import com.coolweather.android.gson.AQI;
 import com.coolweather.android.gson.Weather;
 import com.google.gson.Gson;
 
@@ -93,9 +94,24 @@ public class Utility {
     public static Weather handleWeatherResponse(String response){
         try{
             JSONObject jsonObject = new JSONObject(response);
-            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather6");
             String weatherContent = jsonArray.getJSONObject(0).toString();
             return new Gson().fromJson(weatherContent, Weather.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     *  将返回的JSON数据解析成WeatherAQI实体类
+     */
+    public static AQI handleWeatherAQIResponse(String response){
+        try{
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather6");
+            String weatherAQIContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherAQIContent, AQI.class);
         }catch (Exception e){
             e.printStackTrace();
         }
